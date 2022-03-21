@@ -14,20 +14,20 @@
 
 </head>
 <!--creer un formulaire avec la methode post-->
-<div class=""container-fluid">
+<div class="container-fluid">
     <form id="form-login" method="post">
-        <div class=""text-center">
+        <div class="text-center">
             <img src="" alt="" title="">
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">email</label>
-            <input type="email" class="form-control id="email" ,name="email" required>
+            <input type="email" class="form-control" id="email" ,name="email" required>
         </div>
 
         <div class="mb-3">
              <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control id="password" ,name="password" required>
+            <input type="password" class="form-control" id="password" name="password" required>
     </div>
     <a href="">mot de passe oublier?</a>
     <br />
@@ -36,14 +36,13 @@
 
     ?php
     //creer la method post pourb récuperer le bouton btnconnect
-    if (isset($_POST['btnConnect'])){
+    if (isset($_POST['btn-connexion'])){
 
     //fait un click, var_dump ($email);
     connection ();
-
-
-
+    var_dump("ok click");
     }
+
 <p>Hello marine</p>
 <p>Le travail de saida</p>
 </div>
