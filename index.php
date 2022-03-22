@@ -40,22 +40,37 @@ session_start();
 
 <?php
 
-    //le click pour la connexion (isset : varaible déclaré et differente de null) 
-    //on utilise la variable HTTP POST
+//le click pour la connexion (isset : varaible déclaré et differente de null) 
+    //on utilise la variable HTTP POS
 
-    if(isset($_POST["btnConnect"])){
+ if(isset($_POST["btnConnect"])){
         
-        //var_dump ($email);
-        connexion();
-    }
+    //var_dump ($email);
+    connexion();
+}
 
-    //faire la functin avec la condition avec l'existance des champs mail et mot de passe de
+//mettre toute la connexion dans la fonction 
+function connexion(){
 
-    function connexion(){
+//connexion PDO  
+   $user = "root";
+   $pass = "";
+   $dbname = "basegroup";
+   $host = "localhost";
 
-    //Email fictif
-    $email = "dalidi915@gmail.com";
-    $password = "1234";
+//faire le test d'erreur
+            try{
+                $baseDonnee1 = new PDO("mysql:host=localhost;dbname=basegroup;charset=UTF8", $user, $pass);
+                
+                // faire le Debug de pdo
+              
+                $baseDonnee1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                echo "<h4 class='container alert alert-info text-center'>Connexion à PDO MySQL</h4>";
+
+            } catch (PDOException $e) {
+                print "ERREUR !: " . $e->getMessage() . "<br>";
+                die();
+            }
 
     //hydrater les champs
     $emailUser = trim(htmlspecialchars($_POST['email']));
@@ -65,6 +80,38 @@ session_start();
     //on recupére avec $_post pour envoyer à une autre page
     if(isset($emailUser) && !empty($emailUser) && isset($passwordUser) && !empty($passwordUser)){
     
+        //faire la requette sql 
+        $sql = "SELECT * FROM users WHERE email = ? && password = ?";
+
+        //faille
+        $connect = $baseDonnee1->prepare($sql);
+
+        //Lier tout les paramètre du formulaire a  la requète SQL
+        $connect->bindParam(1,  $emailUser);
+        $connect->bindParam(2, $passwordUser);
+
+        //Execute la requète et afficher un tableau associatif
+        $connect->execute();
+
+
+        //avoir un utilisateur dans la table administrateur
+        //rowCount Elle s'utilise pour le nombre de lignes AFFECTEES
+        if($connect->rowCount() > 0){
+
+            //stocker le resultat dans une variable
+          
+            $result = $connect->fetch();
+
+            //si le resultat existe
+            if($result){
+
+                //on recupére les coordonnées de l'utilisateur d
+                $email = $result['email'];
+                $password = $result['password'];
+            }
+        }
+
+
     
       //Condition d'egalité de mail et de mot de passe
       if($emailUser == $email && $passwordUser == $password){
@@ -72,7 +119,7 @@ session_start();
           $_SESSION['email'] = $emailUser;
 
           //redirection php vers la page de multiplication
-          header("Location: pages/produits.php");
+          header("Location: pages/accueil.php");
           
       }else{
         echo "<h2 class='p-blan text-white'>MERCI DE REMPLIR LES CHAMPS</h2>";
@@ -81,7 +128,7 @@ session_start();
     }else{
       echo "<h2 class='p-blan text-white'>ERREUR DE CONNEXION</h2>";
     }
-    }
+}
     ?>
 
 

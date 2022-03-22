@@ -8,7 +8,7 @@ body, html {
   
   body{
     /* L'image utilisée */
-   background-image: url(../img/wood-1963988_1920.jpg);
+  background-image: url(../img/wood-1963988_1920.jpg);
   padding-top: 80px;
   }
   .container{

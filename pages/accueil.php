@@ -24,23 +24,18 @@ if(isset($_SESSION['email'])){
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    
-    <title>Liste des professeurs</title>
+    <title>Page d'accueil </title>
 </head>
 
 <body>
-    <header>
-        <?php
-        require_once "navbar.php";
-        ?>
-    </header>
-
+    
    
     <!--créer le bouton de deconnexion -->
     <div class="btn-deconect">
         <form method="post" >
             <button class=" btn btn-info" name="btn-deconnexion" >Deconnexion</button>
 
-            <a href="administrateurs.php" class=" btn btn-primary"> administrateur</a>
+            <a href="administrateurs.php" class=" btn btn-primary"> administrateurs</a>
         </form>
         
     </div>
@@ -63,7 +58,6 @@ if(isset($_SESSION['email'])){
             $user = "root";
             $pass = "";
 
-
             //faire le test d'erreur
             try{
                 $baseDonnee1 = new PDO('mysql:host=localhost;dbname=basegroup;charset=UTF8', $user, $pass);
@@ -71,7 +65,7 @@ if(isset($_SESSION['email'])){
                 // faire le Debug de pdo
               
                 $baseDonnee1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "<h4 class='container alert alert-info text-center'>Vous êtes connectez a PDO MySQL</h4>";
+                echo "<h4 class='container alert alert-info text-center'>Connexion réussis a PDO MySQL</h4>";
 
              } catch (PDOException $e) {
                 print "ERREUR !: " . $e->getMessage() . "<br>";
@@ -106,45 +100,38 @@ if(isset($_SESSION['email'])){
                     <?php
 
                         foreach ($affich as $prof){
-                            $date_depot = new DateTime($prof['dateDepot']);
+            
                             ?>
                             
                             <div class="col-md-4">
                             
                                     <div class="card">
                                         <div class="p-3 border bg-light">
-                                            <h4 class="card-title text-info"><?= $prof['nomProduit'] ?></h4>
-                                            <img src="<?= $prof['imageProduit'] ?>" class="card-img-top img-fluid" alt="<?= $prof['nomProduit'] ?>" title="<?= $prof['nomProduit'] ?>">
+                                            <img src="<?= $prof['avatar_prof'] ?>" class="card-img-top img-fluid" alt="<?= $prof['nom_prof'] ?><?= $prof['prenom_prof'] ?>" title="<?= $prof['nom_prof'] ?><?= $prof['prenom_prof'] ?>">
+                                            <h4 class="card-title text-info"><?= $prof['nom_prof'] ?><?= $prof['prenom_prof'] ?></h4>
+                                           
                                         </div>
-
+                                    
 
                                         <div class="card-body">
 
-                                        <p class="card-text"><?= $prof['descriptionProduit'] ?></p>
-                                        <p class="card-text text-success fw-bold">PRIX : <?= $prof['prixProduit'] ?> €</p>
-                                        <p class="card-text">DISPONIBLE :
-                                           
                                            <?php
 
-                                         //si le produit existe
-                                            if($prof['stockProduit'] == true){
-                                                echo "Le produit est disponible";
+                                         //voir si l'enseignant est present ou absent
+                                            if($prof['etat_prof'] == true){
+                                                echo "L'enseignant est present";
 
                                             }else{
-                                                echo "Le produit n'est pas disponible";
+                                                echo "L'enseignant est absent";
                                             }
 
                                             ?>
-                                        </p>
-
-                                        <em class="card-text">Date de depot : <?= $date_depot->format('d-m-Y') ?></em>
-                                        <br />
-
+            
                                         <div class="container-fluid  justify-content-center">
 
-                                                <a href="detailProduit.php?idProduit=<?= $prof['idProduit'] ?>" class="btn btn-primary">Détails</a>
-                                                <a href="editProduit.php?idProduit=<?= $prof['idProduit'] ?>" class="btn btn-secondary">Editer</a>
-                                                <a href="suprimProduit.php?idProduit=<?= $prof['idProduit'] ?>" class="btn btn-info">Supprimer</a>
+                                                <a href="coordonnee.php?id_prof=<?= $prof['id_prof'] ?>" class="btn btn-primary">Coordonnées de l'enseignant</a>
+                                                <a href="ajout.php?id_prof=<?= $prof['id_prof'] ?>" class="btn btn-secondary">Mettre à jour les coordonnées</a>
+                                                <a href="suprim.php?id_prof=<?= $prof['id_prof'] ?>" class="btn btn-info">Supprimer l'enseignant</a>
 
                                         </div>
 
