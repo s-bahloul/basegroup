@@ -1,54 +1,92 @@
-<?php session_start(); ?>
+<?php
+//Pour démarer une nouvelle session
+session_start();
 
+?>
 
-
-<!doctype html>
-<form lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PROJET ECOLE GROUPE </title>
-   <title>page d'acueil index.po </title>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+   
+    
+    
+    <title>CONNEXION</title>
 </head>
-<!--creer un formulaire avec la methode post-->
-<div class="container-fluid">
-    <form id="form-login" method="post">
-        <div class="text-center">
-            <img src="" alt="" title="">
-        </div>
+<body>
+<div class="container">
 
-        <div class="mb-3">
-            <label for="email" class="form-label">email</label>
-            <input type="email" class="form-control" id="email" ,name="email" required>
-        </div>
+  <div class="bg-img">
+    <form  class="container" method="post">
+      <h1 class="h1-conect ">CONNEXION</h1>
 
-        <div class="mb-3">
-             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <a href="">mot de passe oublier?</a>
-    <br />
-    <button type="submit" name="btn-connexion" class="mt-3 btn btn-warning">Connexion</button>
-</form>
+      <label for="email" class="text-white" ><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" required>
 
-    ?php
-    //creer la method post pourb récuperer le bouton btnconnect
-    if (isset($_POST['btn-connexion'])){
+      <label for="formConnect" class="text-white" ><b>Mot de passe</b></label>
+      <input type="password"  name="password" placeholder="Enter Mot de passe" id="formConnect" required>
 
-    //fait un click, var_dump ($email);
-    connection ();
-    var_dump("ok click");
-    }
+      <button type="submit"  name="btnConnect" class="btn text-white bg-info">Connexion</button>
+    </form>
+  </div>
 
-<p>Hello marine</p>
-<p>Le travail de saida</p>
 </div>
 
+
+<?php
+
+    //le click pour la connexion (isset : varaible déclaré et differente de null) 
+    //on utilise la variable HTTP POST
+
+    if(isset($_POST["btnConnect"])){
+        
+        //var_dump ($email);
+        connexion();
+    }
+
+    //faire la functin avec la condition avec l'existance des champs mail et mot de passe de
+
+    function connexion(){
+
+    //Email fictif
+    $email = "dalidi915@gmail.com";
+    $password = "1234";
+
+    //hydrater les champs
+    $emailUser = trim(htmlspecialchars($_POST['email']));
+    $passwordUser = trim(htmlspecialchars($_POST['password']));
+
+    //si les champs ne sont pas vide
+    //on recupére avec $_post pour envoyer à une autre page
+    if(isset($emailUser) && !empty($emailUser) && isset($passwordUser) && !empty($passwordUser)){
+    
+    
+      //Condition d'egalité de mail et de mot de passe
+      if($emailUser == $email && $passwordUser == $password){
+
+          $_SESSION['email'] = $emailUser;
+
+          //redirection php vers la page de multiplication
+          header("Location: pages/produits.php");
+          
+      }else{
+        echo "<h2 class='p-blan text-white'>MERCI DE REMPLIR LES CHAMPS</h2>";
+      }
+
+    }else{
+      echo "<h2 class='p-blan text-white'>ERREUR DE CONNEXION</h2>";
+    }
+    }
+    ?>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
 </body>
 </html>
-
-
-
