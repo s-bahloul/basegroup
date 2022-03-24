@@ -108,22 +108,23 @@ function connexion(){
                 //on recupére les coordonnées de l'utilisateur d
                 $email = $result['email'];
                 $password = $result['password'];
+                if($emailUser == $email && $passwordUser == $password){
+
+                  $_SESSION['email'] = $emailUser;
+        
+                  //redirection php vers la page de multiplication
+                  header("Location: pages/accueil.php");
+                  
+              }else{
+                echo "<h2 class='p-blan text-white'>MERCI DE REMPLIR LES CHAMPS</h2>";
+              }
             }
         }
 
 
     
       //Condition d'egalité de mail et de mot de passe
-      if($emailUser == $email && $passwordUser == $password){
-
-          $_SESSION['email'] = $emailUser;
-
-          //redirection php vers la page de multiplication
-          header("Location: pages/accueil.php");
-          
-      }else{
-        echo "<h2 class='p-blan text-white'>MERCI DE REMPLIR LES CHAMPS</h2>";
-      }
+      
 
     }else{
       echo "<h2 class='p-blan text-white'>ERREUR DE CONNEXION</h2>";
