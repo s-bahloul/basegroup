@@ -53,7 +53,7 @@ if(isset($_FILES['avatar_eleve'])){
 
 
     // Variable pour ajouter le repertoire de destination
-    $repertoireDestination = "image/";
+    $repertoireDestination = "../image/";
     //La photo uploader
 
     //  // viariable pour ajouter le repertoire de destination + la composante final d'un chemin(basename) et qui prend en paramettre en tableau associatif multidimentionnel
@@ -103,8 +103,7 @@ try {
 
 if($dbh){
     //Requète SQL de selection des eleves
-    $sql = "INSERT INTO `eleves`(`id_student`, `nom_eleve`, `avatar_eleve`, `date_naissance_eleve`, `age_eleve`, `classe_eleve`, `absence_eleve`) VALUES (?,?,?,?,?,?,?)";
-
+    $sql = "INSERT INTO `eleves`(`id_Student`, `nom_eleve`, `prenom_eleve`, `avatar_eleve`, `date_naissance_eleve`, `age_eleve`, `classe_eleve`, `absence_eleve`) VALUES (?,?,?,?,?,?,?,?)";
     //Requète préparée = connexion + methode prepare + requete sql
     //Les requètes préparée lutte contre les injections SQL
     //PDO::prepare — Prépare une requête à l'exécution et retourne un objet
@@ -114,11 +113,12 @@ if($dbh){
     //PDOStatement::bindParam — Lie un paramètre à un nom de variable spécifique
     $insert->bindParam(1, $_POST['id_student']);
     $insert->bindParam(2, $_POST['nom_eleve']);
-    $insert->bindParam(3, $_POST['avatar_eleve']);
-    $insert->bindParam(4, $_POST['date_naissance_eleve']);
-    $insert->bindParam(5, $_POST['age_eleve']);
-    $insert->bindParam(6, $_POST['classe_eleve']);
-    $insert->bindParam(7, $_POST['absence_eleve']);
+    $insert->bindParam(3, $_POST['prenom_eleve']);
+    $insert->bindParam(4, $_POST['avatar_eleve']);
+    $insert->bindParam(5, $_POST['date_naissance_eleve']);
+    $insert->bindParam(6, $_POST['age_eleve']);
+    $insert->bindParam(7, $_POST['classe_eleve']);
+    $insert->bindParam(8, $_POST['absence_eleve']);
 
     //executer la requète préparée
     //PDOStatement::execute — Exécute une requête préparée
@@ -126,6 +126,7 @@ if($dbh){
     $insert->execute(array(
         $_POST['id_student'],
         $_POST['nom_eleve'],
+        $_POST['prenom_eleve'],
         $_POST['avatar_eleve'],
         $_POST['date_naissance_eleve'],
         $_POST['age_eleve'],
@@ -136,6 +137,7 @@ if($dbh){
 
     if($insert){
         echo "<p class='container alert alert-success'>Les élèves ont bien été rajouté!</p>";
+        echo "<a href='eleve.php' class='btn btn-success'>Retour</a>";
     }else{
         echo "<p class='alert alert-danger'>Erreur lors de l'ajout de l'élève</p>";
     }

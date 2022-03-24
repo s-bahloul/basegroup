@@ -19,7 +19,7 @@
 <body>
 
 <header>
-    <?php require_once 'menu.php' ?>
+    <?php require_once 'navbar.php' ?>
 </header>
 
 <div class="container-fluid">
@@ -37,7 +37,7 @@
 
         <form action="ajouter_eleve_traitement.php" id="form-login" method="post" enctype="multipart/form-data">
             <div class="text-center">
-                <img src="image/imageslogoe.jpg" alt="logo e-commerce" title="ecommerce.com">
+                <img src="../image/avatar_valou.jpg" alt="logo e-commerce" title="ecommerce.com">
             </div>
             <div class="mb-3">
                 <label for="nom_eleve" class="form-label">Nom de l'élève</label>
@@ -46,8 +46,8 @@
 
             <div class="mb-3">
                 <label for="prenom_eleve" class="form-label">Prénom de l'élève</label>
-                <textarea class="form-control" rows="5" id="prenom_eleve" name="prenom_eleve"
-                          required></textarea>
+                <input type="text" class="form-control"  id="prenom_eleve" name="prenom_eleve"
+                          required>
             </div>
 
             <div class="mb-3">
@@ -68,7 +68,7 @@
 
             <div class="mb-3">
                 <label for="classe_eleve" class="form-label">Classe de l'élève</label>
-                <input type="number" class="form-control" id="classe_eleve" name="classe_eleve" required>
+                <input type="text" class="form-control" id="classe_eleve" name="classe_eleve" required>
             </div>
 
 
@@ -79,7 +79,6 @@
                     <option value="1">NON</option>
                 </select>
             </div>
-
 
 
 
