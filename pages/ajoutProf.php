@@ -1,14 +1,15 @@
 <?php
-//demarer la session
-session_start();
 
+//pour une nouvelle session (demarer)
+
+session_start();
 if(isset($_SESSION['email'])){
 
 ?>
+
 <h1 class="h1-accueil">Bienvenue</h1>
 
 <p class="h1-accueil"><?= $_SESSION['email'] ?></p>
-
 
 <!DOCTYPE html>
 
@@ -18,88 +19,11 @@ if(isset($_SESSION['email'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    
-    <title>Mise à jour professeurs</title>
-
+    <title>Ajouter produit</title>
 </head>
+
 <body>
-
-<header>
-        <?php
-        require_once "navbar.php";
-        ?>
-</header>
-     
-    <!--créer le bouton de deconnexion -->
-    <div class="btn-deconect">
-        <form method="post" >
-            <button class="btn btn-info" name="btn-deconnexion" >Deconnexion</button>
-        </form>
-    </div>
-    <?php
-    function deconnexion(){
-        
-        session_unset();
-        session_destroy();
-        header('Location: ../accueil.php');
-    }
-
-    //faire la deconnexion avec le bouton 
-    if(isset($_POST['btn-deconnexion'])){
-        deconnexion();
-    }
-
-//faire la connexion avec la variable phpmyadmin
-$user = "root";
-$pass = "" ;
-
-//faire le test en cas d'erreur pour avoir le contenu de la page avec le try catch
-try {
-    //faire la class PDO (l'orienté objet)
-    $baseDonnee1 = new PDO('mysql:host=localhost;dbname=basegroup;charset=UTF8', $user, $pass);
-
-    // faire le Debug de pdo
-  
-    $baseDonnee1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "<h4 class='container alert alert-info text-center'>Connexion a PDO MySQL</h4>";
-
-    //catch pour attraper l'exception
-}catch(PDOException $e){
-    print "Erreur !: " . $e->getMessage() . "<br>";
-    die();
-}  
-
-
-//On fait toujours  la même premiére requette pour suprimer ou faire le detail d'un produits,
-// une deuxiéme requette pour supprimer , ajouter ou faire le detail  
-
-//faire la requette SQL de type SELECT
-if($baseDonnee1){
-
-    //Requète SQL de selection des produits 
-    $sql = "SELECT * FROM professeurs WHERE id_prof = ?";
-    //variable idProduit
-    $idProf = $_GET["id_prof"];
-
-    //preparer la requette avec "prepare"
-    //Lorsque la requête est préparée, la base de données va analyser, 
-    //compiler et optimiser son plan pour exécuter la requête.
-    $requete = $baseDonnee1->prepare($sql);
-
-    //recuperer la valeur id grace à $-GET['idProduit'] et l'analyser
-    $requete->bindParam(1, $idProf);
-    //exécuter la requête
-    $requete->execute();
-
-    //PDO:FETCH_ASSOCplace les résultats dans un tableau où les valeurs 
-    //sont mappées à leurs noms de champ.
-    $coordoneProf = $requete->fetch(PDO::FETCH_ASSOC);
-
-}
-?>
 
 <div class="container">
     <!--créer le formulaire et utiliser l"ID pour le traitement-->
@@ -157,7 +81,7 @@ if($baseDonnee1){
             </div>
 
         
-        <button type="submit"  class="btn btn-primary" name="btnConnexion">Mettre à jour les coordonnées </button>
+        <button type="submit"  class="btn btn-primary" name="btnConnexion"> </button>
         <a href="accueil.php" class="btn btn-info">Annuler</a>
 
     </form>
@@ -165,14 +89,13 @@ if($baseDonnee1){
 </div>
 
 
-<?php 
+<?php
 
-}else{
-    echo "<a href='' class='btn btn-info'>S'inscrire</a>";
-    header("location :../index.php");
-}
-?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+ }else{
+            echo "<a href='' class='btn btn-info'>S'inscrire</a>";
+            header("location :../index.php");
+ }
+        
+        ?>
 </body>
 </html>
