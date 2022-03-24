@@ -22,13 +22,13 @@ if(isset($_SESSION["email"])){
 <body>
 
 <header>
-    <?php require_once 'menu.php'?>
+    <?php require_once 'navbar.php'?>
 </header>
 
 
 <!--important n,e pas oblier le enctype-->
 <!--Upload de fichier-->
-<form enctype="multipart/form-data>
+
 
 <?php
 //Existance de ma superglobale $_FILES-->
@@ -43,7 +43,7 @@ if(isset($_FILES['avatar_eleve'])){
     $photo_eleve = $repertoireDestination . basename($_FILES['avatar_eleve']['name']);
     //Recup de l'image uploader
     //On assigne l'image uploader au repertoire de destination + la photo + son nom
-    $_POST['image_produit'] = $photo_produit;
+    $_POST['avatar_eleve'] = $photo_eleve;
 
     //Les conditions de resussite
     //move_uploaded_file — Déplace un fichier téléchargé
@@ -84,7 +84,7 @@ try {
 
 if($dbh){
     //Requète SQL de selection des produits
-    $sql = "UPDATE `eleves` SET `id_student`= ?,`nom_eleve`= ?,`avatar_eleve`= ?,`date_naissance_eleve`= ?,`age_eleve`= ?,`classe_eleve`= ? WHERE absence_eleve = ?";
+    $sql = "UPDATE `eleves` SET `nom_eleve`= ?,`avatar_eleve`= ?,`date_naissance_eleve`= ?,`age_eleve`= ?,`classe_eleve`= ? WHERE id_Student = ?";
 
 
     //Requète préparée = connexion + methode prepare + requete sql
@@ -95,15 +95,12 @@ if($dbh){
     //PDOStatement::execute — Exécute une requête préparée
     //Elle execute la reqète passé dans un tableau de valeur
     $update->execute(array(
-        $_POST['id_student'],
         $_POST['nom_eleve'],
         $_POST['avatar_eleve'],
         $_POST['date_naissance_eleve'],
         $_POST['age_eleve'],
         $_POST['classe_eleve'],
-        $_GET['absence_eleve']
-
-
+        $_GET['id_student']
     ));
 
     if($update){
@@ -114,7 +111,7 @@ if($dbh){
     }
 }
 }else{
-    echo "<a href='' class='btn btn-warning'>S'inscrire</a>";
+    echo "test";
 }
 ?>
 </body>

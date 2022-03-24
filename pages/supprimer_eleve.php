@@ -101,7 +101,7 @@ if($dbh){
 
 <?php
 if(isset($_POST['btn-supprimer'])){
-//ecrire une requete sql qui supprime votre produit
+//ecrire une requete sql qui supprime votre l'élève
 $sql ='DELETE FROM eleve WHERE id_Student = ?';
 //Créer une requète préparée pour lutter contre les injection sql
 
@@ -129,7 +129,7 @@ echo "<div class='container'><a  href='eleve.php' class='mt-3 btn-success'>RETOU
 <?php
     }else{
         //Sinon message d'erreur et on recomence
-        echo "<p class='alert alert-danger'>Erreur lors de la supression du produit !</p>";
+        echo "<p class='alert alert-danger'>Erreur lors de la supression de l'élève!</p>";
         echo "<div class='container'><a href='eleve.php' class='mt-3 btn btn-success'>RETOUR</a></div>";
     }
 }

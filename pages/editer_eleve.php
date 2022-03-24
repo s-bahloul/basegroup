@@ -1,4 +1,4 @@
-?php session_start(); ?>
+<?php session_start(); ?>
 
 <!doctype html>
 <html lang="en">
@@ -18,9 +18,42 @@
     <title> Page Ajouter produit</title>
 </head>
 <body>
+<?php
+//Les variable de phpmyadmin
+$user = "root";
+$pass = "";
+//test d'erreur
+try {
+    /*
+     * PHP Data Objects est une extension définissant l'interface pour accéder à une base de données avec PHP. Elle est orientée objet, la classe s’appelant PDO.
+     */
+    //Instance de la classe PDO (Php Data Object)
+    $dbh = new PDO('mysql:host=localhost;dbname=basegroup;charset=UTF8', $user, $pass);
+    //Debug de pdo
+    /*
+     * L'opérateur de résolution de portée (aussi appelé Paamayim Nekudotayim) ou, en termes plus simples,
+     * le symbole "double deux-points" (::), fournit un moyen d'accéder aux membres static ou constant, ainsi qu'aux propriétés ou méthodes surchargées d'une classe.
+     */
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "<p class='container alert alert-success text-center'>Vous êtes connectez a PDO MySQL</p>";
+
+} catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+
+
+    $sql = "SELECT * FROM `eleves` WHERE id_Student = ?";
+    $request = $dbh->prepare($sql);
+    $id = $_GET['id_student'];
+    $request->bindParam(1, $id);
+    $request->execute();
+    $update = $request->fetch();
+?>
 
 <header>
-    <?php require_once 'menu.php' ?>
+    <?php require_once 'navbar.php' ?>
 </header>
 
 <div class="container-fluid">
@@ -36,7 +69,7 @@
     <div class="container">
         <!--ajout de l'attribut enctype qui Permet de telecharger  tous type de fichier (.pdf, .txt, .jpg,.webp, etc...)-->
 
-        <form action="coordonneEleve.php" id="form-login" method="post" enctype="multipart/form-data">
+        <form action="editer_eleve_traitement.php?id_student=<?= $update['id_Student'] ?>" id="form-login" method="post" enctype="multipart/form-data">
             <div class="text-center">
                 <img src="" alt="" title="">
             </div>
@@ -58,17 +91,17 @@
 
             <div class="mb-3">
                 <label for="date_naissance_eleve" class="form-label">Date de naissance des eleves</label>
-                <input type="date_naissance_eleve" class="form-control" id="date_naissance_eleve" name="date_naissance_eleve" required>
+                <input type="date" class="form-control" id="date_naissance_eleve" name="date_naissance_eleve" required>
             </div>
 
             <div class="mb-3">
                 <label for="age_eleve" class="form-label">L'age des élèves</label>
-                <input type="file" class="form-control" id="age_eleve" name="age_eleve" required>
+                <input type="number" class="form-control" id="age_eleve" name="age_eleve" required>
             </div>
 
             <div class="mb-3">
                 <label for="classe_eleve" class="form-label">La classe des élèves</label>
-                <input type="file" class="form-control" id="classe_eleve" name="classe_eleve" required>
+                <input type="text" class="form-control" id="classe_eleve" name="classe_eleve" required>
             </div>
 
 

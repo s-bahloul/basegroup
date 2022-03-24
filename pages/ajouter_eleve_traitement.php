@@ -20,7 +20,7 @@
 <body>
 
 <header>
-    <?php require_once 'menu.php'?>
+    <?php require_once 'navbar.php'?>
 </header>
 
 
@@ -67,7 +67,7 @@ if(isset($_FILES['avatar_eleve'])){
     //Les conditions de resussite
     //move_uploaded_file — Déplace un fichier téléchargé
     //On assigne a la photo un nom temporaire random en cas d'echec d'upload
-    if(move_uploaded_file($_FILES['avatar_eleve']['tmp_name'], $photo_produit)){
+    if(move_uploaded_file($_FILES['avatar_eleve']['tmp_name'], $photo_eleve)){
         echo "<p class='container alert alert-success'>Le fichier est valide et téléchargé avec succès !</p>";
     }else{
         echo "<p class='container alert alert-danger'>Erreur lors du téléchargement de votre fichier !</p>";
@@ -131,6 +131,7 @@ if($dbh){
         $_POST['age_eleve'],
         $_POST['classe_eleve'],
         $_POST['absence_eleve']
+
     ));
 
     if($insert){

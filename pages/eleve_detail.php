@@ -3,7 +3,7 @@
 session_start();
 if(isset($_SESSION["email"])){
 
-    //Connexion a la base de donnée ecommer via PDO
+    //Connexion a la base de donnée basegroupe via PDO
 //Les variable de phpmyadmin
     $user = "root";
     $pass = "";
@@ -13,7 +13,7 @@ if(isset($_SESSION["email"])){
          * PHP Data Objects est une extension définissant l'interface pour accéder à une base de données avec PHP. Elle est orientée objet, la classe s’appelant PDO.
          */
         //Instance de la classe PDO (Php Data Object)
-        $dbh = new PDO('mysql:host=localhost;dbname=ecommerce', $user, $pass);
+        $dbh = new PDO('mysql:host=localhost;dbname=basegroup;charset=UTF8', $user, $pass);
         //Debug de pdo
         /*
          * L'opérateur de résolution de portée (aussi appelé Paamayim Nekudotayim) ou, en termes plus simples,
@@ -28,7 +28,7 @@ if(isset($_SESSION["email"])){
     }
 
     if($dbh){
-        //Requète SQL de selection des produits
+        //Requète SQL de selection des élèves
         $sql = "SELECT * FROM eleves WHERE id_student = ?";
 
         $id_student = $_GET['id_student'];
@@ -67,7 +67,7 @@ if(isset($_SESSION["email"])){
     <body>
     <header>
         <?php
-        require_once "menu.php";
+        require_once "navbar.php";
         ?>
     </header>
     <div class="container-fluid">
@@ -81,18 +81,19 @@ if(isset($_SESSION["email"])){
 
 
 
+
         <div class="container">
 
             <!--On passe ID pour le traitement-->
             <form method="post">
                 <p class="text-center text-danger">COORDONNE DES ELEVES</p>
                 <p class="text-center text-danger"><?= $details['nom_eleve'] ?></p>
-                <p class="text-center text-danger"><?= $details['prenon_eleve'] ?></p>
+                <p class="text-center text-danger"><?= $details['prenom_eleve'] ?></p>
                 <p class="text-center text-danger"><?= $details['date_naissance_eleve'] ?></p>
                 <p class="text-center text-danger"><?= $details['age_eleve'] ?></p>
                 <p class="text-center text-danger"><?= $details['classe_eleve'] ?></p>
                 <p class="text-center text-danger">
-                    <img src="<?= $details['Avatar_eleve'] ?>" class="img-thumbnail" alt="" title="" width="200"/>
+                    <img src="<?= $details['avatar_eleve'] ?>" class="img-thumbnail" alt="" title="" width="200"/>
                 </p>
 
                 <div class="d-flex justify-center">
@@ -104,7 +105,7 @@ if(isset($_SESSION["email"])){
             </form>
 
 
-        </div>
+        </div
     </div>
     </body>
     </html>
