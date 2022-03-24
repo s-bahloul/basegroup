@@ -92,7 +92,7 @@ if(isset($_SESSION['email'])){
 <?php
 
  }else{
-            echo "<a href='' class='btn btn-info'>S'inscrire</a>";
+          
             header("location :../index.php");
  }
         

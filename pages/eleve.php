@@ -130,9 +130,9 @@ if(isset($_SESSION['email'])){
             
                         <div class="container-fluid  justify-content-center">
 
-                            <a href="editer.php?id_Student=<?= $eleve['id_Student'] ?>" class="btn btn-primary">Coordonnées de l'enseignant</a>
-                            <a href="miseajour.php?id_Student=<?= $eleve['id_Student'] ?>" class="btn btn-secondary">Mettre à jour les coordonnées</a>
-                            <a href="supprimer_eleve.php?id_Student=<?= $eleve['id_Student'] ?>" class="btn btn-info">Supprimer l'enseignant</a>
+                            <a href="eleve_detail.php?id_student=<?= $eleve['id_Student'] ?>" class="btn btn-primary">Coordonnées de l'éleve</a>
+                            <a href="editer_eleve.php?id_student=<?= $eleve['id_Student'] ?>" class="btn btn-secondary">Mettre à jour les coordonnées</a>
+                            <a href="supprimer_eleve.php?id_student=<?= $eleve['id_Student'] ?>" class="btn btn-info">Supprimer l'éleve</a>
                         </div>
 
                     </div>
