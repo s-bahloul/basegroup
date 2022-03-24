@@ -94,8 +94,8 @@ if(isset($_SESSION["email"])){
 
     <div class="mb-3">
         <label for="prenom_eleve" class="form-label">Prenom de l'élève</label>
-        <textarea class="form-control" rows="5" id="prenom_eleve" name="prenom_eleve"
-                  required></textarea>
+        <input type="text" class="form-control" rows="5" id="prenom_eleve" name="prenom_eleve"
+                  required></input>
     </div>
 
     <div class="mb-3">
@@ -110,7 +110,7 @@ if(isset($_SESSION["email"])){
 
     <div class="mb-3">
         <label for="age_eleve" class="form-label">L'age des élèves</label>
-        <input type="file" class="form-control" id="age_eleve" name="age_eleve" required>
+        <input type="number" class="form-control" id="age_eleve" name="age_eleve" required>
     </div>
 
     <div class="mb-3">

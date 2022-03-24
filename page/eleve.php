@@ -104,13 +104,13 @@ if ($dbh) {
     foreach ($eleves as $eleve) {
 
         //faire une
-        $date_depot = new DateTime($eleves['date_naissance_eleve']);
+        $date_depot = new DateTime($eleve['date_naissance_eleve']);
     }
     ?>
     <img src="<?= $eleve['avatar_eleve'] ?>" class="carte-img-top img-fluid" alt="">
     alt="<?= $eleve['nom_eleve'] ?><?= $eleve['prenom_eleve'] ?>"
     title="<?= $eleve['prenom_eleve'] ?><?= $eleve['prenom_eleve'] ?>"
-    <h4 class="title-carte text-danger"><?= $eleves['nom_eleve'] ?><?= $eleve['prenom_eleve'] ?></h4>
+    <h4 class="title-carte text-danger"><?= $eleve['nom_eleve'] ?><?= $eleve['prenom_eleve'] ?></h4>
 
 
     <?php
