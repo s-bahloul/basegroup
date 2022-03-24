@@ -5,7 +5,7 @@ echo "Bienvenue : " . $_SESSION["email"];
 
 
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -16,7 +16,7 @@ echo "Bienvenue : " . $_SESSION["email"];
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <title> CRUD GROUPE </title>
     <title>La liste des élèves </title>
@@ -25,10 +25,15 @@ echo "Bienvenue : " . $_SESSION["email"];
 
 <body>
 
+<!--Appel du menu -->
 <header>
-<?php require_once 'menu.php' ?>
-></header>
+    <?php require_once 'menu.php' ?>
+</header>
 
+<!--bouton déconnexion-->
+<form method="post">
+    <button class="deconnexion" type="submit" name="btn-deconnexion">DECONNEXION</button>
+</form>
 
 
 <?php
@@ -73,7 +78,6 @@ if (isset($_POST['btn-deconnexion'])) {
 }
 
 
-
 // Je créeais la requete pour afficher la table élèves
 
 if ($dbh) {
@@ -87,63 +91,70 @@ if ($dbh) {
 
 ?>
 
+<div class="text-center">
+    <a href="coordonneEleve.php" class="btn btn-danger">Ajouter les coordonnés d' un élève</a>
+</div>
 
-
-    <div class="text-center">
-        <a href="cordonneEleve.php"class="btn btn-danger">Ajouter un élève</a>
-    </div>
-
-    <h3 class="mt-3 text-warning">La liste des élèves</h3>
+<h3 class="mt-3 text-warning">La liste des élèves</h3>
 
 
 <div class="row">
-        <!--Pour chaque col on affiche une ligne de la table éleves de la BDD ecommerce-->
-        <?php
-            foreach ($eleves as $eleve){
-        ?>
-                        <img src="<?= $eleve['avatar_eleve'] ?>" class="carte-img-top img-fluid">
-                             alt="<?=$eleve['nom_eleve']?><?=$eleve['prenom_eleve']?>" title="<?= $eleve['prenom_eleve'] ?><?=$eleve['prenom_eleve']?>"
-                                 <h4 class="title-carte text-danger"><?= $eleves['nom_eleve'] ?><?=$eleve['prenom_eleve']?></h4>
+    <!--Pour chaque col on affiche une ligne de la table éleves de la BDD ecommerce-->
+    <?php
+    foreach ($eleves as $eleve) {
+
+        //faire une
+        $date_depot = new DateTime($eleves['date_naissance_eleve']);
+    }
+    ?>
+    <img src="<?= $eleve['avatar_eleve'] ?>" class="carte-img-top img-fluid">
+    alt="<?= $eleve['nom_eleve'] ?><?= $eleve['prenom_eleve'] ?>"
+    title="<?= $eleve['prenom_eleve'] ?><?= $eleve['prenom_eleve'] ?>"
+    <h4 class="title-carte text-danger"><?= $eleves['nom_eleve'] ?><?= $eleve['prenom_eleve'] ?></h4>
 
 
-                            <?php
-                            //var_dump($eleve['abcence_eleve']);
-                            if ($eleve['absence_eleve'] == true) {
-                                echo "Oui";
-                            } else {
-                                echo "NON";
-                            }
-                            ?>
-                        </div>
-
-                        </br>
-
-                            <a href="cordonneEleve.php?id_produit=<?= $eleve['id_eleve'] ?>"
-                               class="mt-2 btn btn-success">Coordonnés de l'élève</a>
-
-                            <a href="miseajour.php?id_produit=<?= $eleve['id_eleve'] ?>"
-                               class="mt-2 btn btn-warning">mise à jour des coordonnées</a>
-
-                            <a href="supprimer_eleves.php?id_produit=<?= $eleve['id_eleve'] ?>"
-                               class="mt-2 btn btn-danger">Supprimer l'élève</a>
-
-                        </div>
+    <?php
+    //var_dump($eleve['abcence_eleve']);
+    if ($eleve['absence_eleve'] == true) {
+        echo "Oui";
+    } else {
+        echo "NON";
+    }
 
 
-                    </div>
-                </div>
-            </div>
+    ?>
+
+    <p>Date de depot : <?= $date_depot->format("d/m/Y h:i:s") ?></p>
+</div>
+
+</br>
+
+<a href="coordonneEleve.php?id_student=<?= $eleve['id_student'] ?>"
+   class="mt-2 btn btn-success">Coordonnés de l'élève</a>
+
+<a href="miseajour.php?id_student=<?= $eleve['id_student'] ?>"
+   class="mt-2 btn btn-warning">mise à jour des coordonnées</a>
+
+<a href="supprimer_eleves.php?id_student=<?= $eleve['id_student'] ?>"
+   class="mt-2 btn btn-danger">Supprimer l'élève</a>
+
+</div>
 
 
 </div>
-    <?php
-    } else {
-        echo "<a href='' class='btn btn-warning'>S'inscrire</a>";
-        header('Location: index.php');
-    }
-    ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
+</div>
+</div>
+
+
+</div>
+<?php
+} else {
+    echo "<a href='' class='btn btn-warning'>S'inscrire</a>";
+    header('Location: index.php');
+}
+?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>
