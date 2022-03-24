@@ -13,7 +13,7 @@ try {
      * PHP Data Objects est une extension définissant l'interface pour accéder à une base de données avec PHP. Elle est orientée objet, la classe s’appelant PDO.
      */
     //Instance de la classe PDO (Php Data Object)
-    $dbh = new PDO('mysql:host=localhost;dbname=ecommerce', $user, $pass);
+    $dbh = new PDO('mysql:host=localhost;dbname=basegroup', $user, $pass);
     //Debug de pdo
     /*
      * L'opérateur de résolution de portée (aussi appelé Paamayim Nekudotayim) ou, en termes plus simples,
@@ -68,7 +68,7 @@ if($dbh){
 <!--on appelle le menue-->
 <header>
     <?php
-    require_once "menu.php";
+    require_once "navbar.php";
     ?>
 </header>
 
