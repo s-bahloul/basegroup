@@ -7,7 +7,7 @@ if(isset($_SESSION['email'])){
 
 ?>
 
-<h1 class="h1-accueil">Bienvenue</h1>
+<h1 class="h1-accueil text-blak">Bienvenue</h1>
 
 <p class="h1-accueil"><?= $_SESSION['email'] ?></p>
 
@@ -20,6 +20,7 @@ if(isset($_SESSION['email'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
     <title>Administrateurs</title>
 </head>
 
