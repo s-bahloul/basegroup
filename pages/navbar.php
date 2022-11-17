@@ -15,9 +15,9 @@
 <body>
 
 <nav class="navbar fixed-top navbar- bg-info">
-  <a class="navbar-brand" href="#">Collège Georges Pompidou</a>
+  <a class="navbar-brand text-white" href="#">Collège Georges Pompidou</a>
 
-      <a class="navbar-brand" href="#">Classe : 6ème A</a>
+      <a class="navbar-brand text-white" href="#">Classe : 6ème A</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
